@@ -28,7 +28,12 @@ $router->delete('/items/{ItemID}','ItemsController@deleteItem');
 // Bids routes
 
 $router->get('/bids','BidsController@getBids');
+$router->get('/data/{BidID}', 'BidsController@show');
 $router->get('/bids/{BidID}','BidsController@showBid');
 $router->post('/bids','BidsController@addBid');
 $router->put('/bids/{BidID}','BidsController@updateBid');
 $router->delete('/bids/{BidID}','BidsController@deleteBid');
+
+//  features
+
+$router->get('/item/search/', 'FeaturesController@filter');
