@@ -31,18 +31,14 @@ public function index()
 }
 public function addItem(Request $request ){
 
-    $rules = [
+    $this->validate($request, [
+        'ItemName' => 'required',
+        'Description' => 'required',
+        'StartingBid' => 'required|numeric',
+        ]);
 
-    'ItemName' => 'required',
-    'Description' => 'required',
-    'StartingBid' => 'required',
-    'CurrentBid' => 'required',
-    'BidderID' => 'required',
-
-    ];
-
-    $this->validate($request,$rules);
     $items = Items::create($request->all());
+
 
     return $this->successResponse($items,Response::HTTP_CREATED);
 }
@@ -54,32 +50,6 @@ public function showItem($ItemID)
 
 }
 
-public function updateItem(Request $request,$ItemID)
-{
-        
-    $rules = [
-
-        'ItemName' => 'required',
-        'Description' => 'required',
-        'StartingBid' => 'required',
-        'CurrentBid' => 'required',
-        'BidderID' => 'required',
-    
-        ];
-
-    $this->validate($request, $rules);
-    $items = Items::findOrFail($ItemID);
-    $items->fill($request->all());
-
-    // if no changes happen
-    if ($items->isClean()) {
-    return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
-    }
-
-    $items->save();
-    return $this->successResponse($items);
-
-}
 
 public function deleteItem($ItemID)
 {
