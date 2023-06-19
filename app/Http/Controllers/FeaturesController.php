@@ -114,6 +114,7 @@ public function addBidAmount(Request $request)
   }
 
 
+
   public function HigherBid()
   {
       // Retrieve items with higher bids
@@ -123,6 +124,27 @@ public function addBidAmount(Request $request)
   
       return $this->successResponse($items);
   }
+
+
+// Show Item Name and Bid Amount using BidID
+public function showHighBidItem($BidID)
+{
+    $specificData = Bids::find($BidID);
+
+    if (!$specificData) {
+        return response()->json(['message' => 'Bid not found'], 404);
+    }
+
+    $bidderId = $specificData->BidderID;
+    $bidAmount = $specificData->BidAmount;
+    $itemId = $specificData->ItemID;
+
+    // Fetch the ItemName based on the ItemID
+    $item = Items::find($itemId);
+    $itemName = $item ? $item->ItemName : null;
+
+    return response()->json(['BidderID' => $bidderId, 'BidAmount' => $bidAmount, 'ItemName' => $itemName]);
+}
   
 
 }

@@ -19,10 +19,9 @@ $router->get('/', function () use ($router) {
 
 // Items routes
 
-$router->get('/items','ItemsController@getItem');
+$router->get('/items','ItemsController@index');
 $router->get('/items/{ItemID}','ItemsController@showItem');
 $router->post('/items','ItemsController@addItem');
-$router->put('/items/{ItemID}','ItemsController@updateItem');
 $router->delete('/items/{ItemID}','ItemsController@deleteItem');
 
 
@@ -30,10 +29,8 @@ $router->delete('/items/{ItemID}','ItemsController@deleteItem');
 
 // Bids routes
 
-$router->get('/bids','BidsController@getBids');
-$router->get('/data/{BidID}', 'BidsController@show');
+$router->get('/bids','BidsController@index');
 $router->get('/bids/{BidID}','BidsController@showBid');
-$router->post('/bids','BidsController@addBid');
 $router->delete('/bids/{BidID}','BidsController@deleteBid');
 
 //  ITEM FEATURES
@@ -44,6 +41,7 @@ $router->get('/show/high', 'FeaturesController@HigherBid');
 
 // BID FEATURES
 
-$router->put('/update/bid/{BidID}','FeaturesController@updateBidAmount');
+$router->put('/bid/update/{BidID}','FeaturesController@updateBidAmount');
 $router->post('/add/bid','FeaturesController@addBidAmount');
+$router->get('/bid/info/{BidID}','FeaturesController@showHighBidItem');
 

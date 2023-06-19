@@ -15,34 +15,6 @@ public function __construct(Request $request){
     $this->request = $request;
 }
 
-public function getBids(){
-
-$bids = Bids::all();
-
-return $this->successResponse($bids, Response::HTTP_OK);
-
-}
-
-public function show($BidID)
-{
-    $specificData = Bids::find($BidID);
-
-    if (!$specificData) {
-        return response()->json(['message' => 'Bid not found'], 404);
-    }
-
-    $bidderId = $specificData->BidderID;
-    $bidAmount = $specificData->BidAmount;
-    $itemId = $specificData->ItemID;
-
-    // Fetch the ItemName based on the ItemID
-    $item = Items::find($itemId);
-    $itemName = $item ? $item->ItemName : null;
-
-    return response()->json(['BidderID' => $bidderId, 'BidAmount' => $bidAmount, 'ItemName' => $itemName]);
-}
-
-
 
 public function index()
 {

@@ -14,14 +14,6 @@ public function __construct(Request $request){
     $this->request = $request;
 }
 
-public function getItem(){
-
-$items = Items::all();
-
-return $this->successResponse($items, Response::HTTP_OK);
-
-}
-
 
 public function index()
 {
@@ -38,8 +30,6 @@ public function addItem(Request $request ){
         ]);
 
     $items = Items::create($request->all());
-
-
     return $this->successResponse($items,Response::HTTP_CREATED);
 }
 
